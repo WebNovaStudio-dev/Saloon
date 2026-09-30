@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LUXE | Modern Salon &amp; Wellness Atelier</title> <!--[cite: 14]-->
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts: Italiana, Playfair Display & Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Italiana&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"> <!--[cite: 14]-->
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        italiana: ['"Italiana"', 'serif'],
+                        serif: ['"Playfair Display"', 'Georgia', 'serif'], /*[cite: 14]*/
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        cream: {
+                            50: '#FCFBF9',
+                            100: '#FAF8F5',
+                            200: '#F4EFEA',
+                            300: '#EBE3DA',
+                            400: '#DFD4C7',
+                        },
+                        champagne: {
+                            400: '#C5A059', /*[cite: 14]*/
+                            500: '#B89552',
+                            600: '#9E7B3B',
+                            700: '#7E602A',
+                        },
+                        charcoal: {
+                            700: '#44403C',
+                            800: '#292524',
+                            900: '#1C1917',
+                        }
+                    },
+                    boxShadow: {
+                        'soft-luxury': '0 20px 45px -15px rgba(184, 149, 82, 0.12), 0 0 25px rgba(0, 0, 0, 0.03)',
+                        'linen-card': '0 10px 30px -5px rgba(28, 25, 23, 0.04)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #FAF8F5; }
+        ::-webkit-scrollbar-thumb { background: #C5A059; border-radius: 3px; } /*[cite: 14]*/
+
+        .glass-linen {
+            background: rgba(250, 248, 245, 0.88);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+
+        .editorial-border {
+            border: 1px solid rgba(184, 149, 82, 0.22);
+        }
+
+        .reveal-element {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: all 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal-element.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .menu-item-row:hover .service-arrow {
+            transform: translateX(4px);
+            color: #9E7B3B;
+        }
+    </style>
+</head>
+
+<body class="bg-cream-100 text-charcoal-800 font-sans antialiased overflow-x-hidden selection:bg-champagne-400 selection:text-white">
+
+    <!-- Top Atelier Announcement Ribbon -->
+    <div class="bg-charcoal-900 text-cream-200 text-[11px] font-medium tracking-[2.5px] uppercase py-2 px-6 text-center">
+        <span>Manhattan Atelier No. 04 • Spring Private Bookings Now Open</span> <!--[cite: 14]-->
+    </div>
+
+    <!-- Interactive Toast Notification -->
+    <div id="bookingToast" class="fixed top-24 right-6 z-50 transform -translate-y-28 opacity-0 transition-all duration-300 pointer-events-none">
+        <div class="bg-white px-6 py-4 rounded-2xl border border-champagne-400/40 shadow-soft-luxury flex items-center gap-3">
+            <div class="w-9 h-9 rounded-full bg-cream-200 text-champagne-600 flex items-center justify-center font-bold">
+                <i class="fa-solid fa-sparkles"></i>
+            </div>
+            <div>
+                <p class="text-xs font-bold text-charcoal-900">Reservation Request Confirmed</p>
+                <p class="text-[11px] text-stone-500">Our concierge will contact you shortly to confirm your slot.</p> <!--[cite: 14]-->
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation Bar[cite: 14] -->
+    <nav class="sticky top-0 z-40 glass-linen border-b border-cream-300 transition-all duration-300" id="mainNav">
+        <div class="max-w-7xl mx-auto px-6 lg:px-10 py-4 flex justify-between items-center">
+            
+            <!-- Brand Logo[cite: 14] -->
+            <a href="#home" class="flex items-center gap-1.5 group">
+                <span class="font-italiana text-3xl font-normal tracking-[4px] text-charcoal-900">LUXE</span> <!--[cite: 14]-->
+                <span class="w-1.5 h-1.5 rounded-full bg-champagne-500 mb-1"></span>
+            </a>
+
+            <!-- Desktop Links[cite: 14] -->
+            <div class="hidden md:flex items-center space-x-10 text-xs font-semibold uppercase tracking-[3px] text-stone-600">
+                <a href="#experience" class="hover:text-champagne-600 transition-colors">Philosophy</a>
+                <a href="#features" class="hover:text-champagne-600 transition-colors">Experience</a> <!--[cite: 14]-->
+                <a href="#pricing" class="hover:text-champagne-600 transition-colors">Service Menu</a> <!--[cite: 14]-->
+                <a href="#lookbook" class="hover:text-champagne-600 transition-colors">Lookbook</a>
+                <a href="#contact" class="hover:text-champagne-600 transition-colors">Visit Us</a> <!--[cite: 14]-->
+            </div>
+
+            <!-- Booking Action[cite: 14] -->
+            <div class="hidden md:flex items-center gap-4">
+                <a href="#contact" class="px-7 py-3 rounded-full bg-charcoal-900 hover:bg-champagne-600 text-white font-bold text-xs uppercase tracking-[2px] transition-all duration-300 shadow-sm"> <!--[cite: 14]-->
+                    Book Session <!--[cite: 14]-->
+                </a>
+            </div>
+
+            <!-- Mobile Hamburger Button -->
+            <button id="mobileMenuBtn" aria-label="Toggle navigation menu" class="md:hidden text-charcoal-900 p-2 focus:outline-none">
+                <i class="fa-solid fa-bars text-xl" id="menuToggleIcon"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Drawer -->
+        <div id="mobileDrawer" class="hidden md:hidden px-6 pt-3 pb-8 bg-cream-50 border-b border-cream-300">
+            <div class="flex flex-col gap-4 text-xs font-bold uppercase tracking-[2.5px] text-stone-700 pt-2">
+                <a href="#experience" class="mobile-nav-link py-2 hover:text-champagne-600">Philosophy</a>
+                <a href="#features" class="mobile-nav-link py-2 hover:text-champagne-600">The Experience</a> <!--[cite: 14]-->
+                <a href="#pricing" class="mobile-nav-link py-2 hover:text-champagne-600">Service Menu</a> <!--[cite: 14]-->
+                <a href="#lookbook" class="mobile-nav-link py-2 hover:text-champagne-600">Lookbook</a>
+                <a href="#contact" class="mobile-nav-link py-2 hover:text-champagne-600">Visit Us</a> <!--[cite: 14]-->
+                <a href="#contact" class="mobile-nav-link text-center w-full mt-2 py-3.5 rounded-full bg-charcoal-900 text-white font-bold tracking-widest uppercase"> <!--[cite: 14]-->
+                    Book Session <!--[cite: 14]-->
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Asymmetrical Magazine Hero[cite: 14] -->
+    <header id="home" class="relative pt-12 pb-24 lg:py-28 px-6 lg:px-10 overflow-hidden">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+                
+                <!-- Left Editorial Headline[cite: 14] -->
+                <div class="lg:col-span-7 reveal-element">
+                    <div class="inline-flex items-center gap-3 text-champagne-600 text-xs uppercase tracking-[3px] font-semibold mb-6">
+                        <span class="w-6 h-[1px] bg-champagne-500"></span>
+                        Haute Coiffure &amp; Dermal Sanctuary <!--[cite: 14]-->
+                    </div>
+
+                    <h1 class="font-serif text-5xl sm:text-7xl lg:text-8xl font-normal text-charcoal-900 leading-[1.05] tracking-tight mb-8"> <!--[cite: 14]-->
+                        Elevate Your <br>
+                        <span class="font-italiana italic text-champagne-600">Natural Beauty.</span> <!--[cite: 14]-->
+                    </h1>
+
+                    <p class="text-stone-600 text-base sm:text-lg font-light leading-relaxed max-w-xl mb-10">
+                        Premium styling, bespoke treatments, and a luxury atmosphere designed to make you feel like your best self. <!--[cite: 14]--> Discover personalized botanical formulations tailored to your essence. <!--[cite: 14]-->
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
+                        <a href="#contact" class="px-9 py-4 rounded-full bg-charcoal-900 hover:bg-champagne-600 text-white font-bold text-xs uppercase tracking-[2px] text-center shadow-lg transition-all duration-300 hover:scale-105"> <!--[cite: 14]-->
+                            Book Your Session <!--[cite: 14]-->
+                        </a>
+                        <a href="#pricing" class="px-9 py-4 rounded-full bg-white border border-cream-300 hover:border-champagne-500 text-charcoal-900 font-semibold text-xs uppercase tracking-[2px] text-center shadow-linen-card transition-all"> <!--[cite: 14]-->
+                            Explore Service Menu <!--[cite: 14]-->
+                        </a>
+                    </div>
+
+                    <!-- Clean Metric Badges[cite: 14] -->
+                    <div class="grid grid-cols-3 gap-6 pt-12 mt-12 border-t border-cream-300 max-w-lg">
+                        <div>
+                            <p class="font-serif text-3xl font-normal text-charcoal-900">15+</p> <!--[cite: 14]-->
+                            <p class="text-[11px] uppercase tracking-wider text-stone-500 mt-1">Master Stylists</p> <!--[cite: 14]-->
+                        </div>
+                        <div>
+                            <p class="font-serif text-3xl font-normal text-champagne-600">100%</p> <!--[cite: 14]-->
+                            <p class="text-[11px] uppercase tracking-wider text-stone-500 mt-1">Organic Botanicals</p> <!--[cite: 14]-->
+                        </div>
+                        <div>
+                            <p class="font-serif text-3xl font-normal text-charcoal-900">VIP</p> <!--[cite: 14]-->
+                            <p class="text-[11px] uppercase tracking-wider text-stone-500 mt-1">Private Suites</p> <!--[cite: 14]-->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Editorial Image Composition[cite: 14] -->
+                <div class="lg:col-span-5 relative reveal-element">
+                    <div class="relative mx-auto max-w-md lg:max-w-none">
+                        
+                        <!-- Main Architectural Image[cite: 14] -->
+                        <div class="rounded-3xl overflow-hidden shadow-soft-luxury border border-cream-300">
+                            <img 
+                                src="https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&q=80&w=1200" 
+                                alt="LUXE Salon Interior" 
+                                class="w-full h-[520px] object-cover"
+                            > <!--[cite: 14]-->
+                        </div>
+
+                        <!-- Floating Floating Ivory Note -->
+                        <div class="absolute -bottom-6 -left-6 bg-white/95 backdrop-blur-md p-6 rounded-2xl border border-cream-300 shadow-soft-luxury max-w-xs hidden sm:block">
+                            <div class="flex items-center gap-2 text-champagne-500 text-xs mb-2">
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+                            <p class="font-serif italic text-xs text-charcoal-800 leading-relaxed">
+                                "The atmosphere at LUXE is unmatched. You walk out relaxed and entirely revitalized." <!--[cite: 14]-->
+                            </p>
+                            <span class="text-[10px] uppercase tracking-widest text-stone-400 mt-2 block font-semibold">— Manhattan Edition</span> <!--[cite: 14]-->
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </header>
+
+    <!-- Atelier Philosophy Manifesto -->
+    <section id="experience" class="py-20 bg-cream-200 border-y border-cream-300 reveal-element">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <span class="text-xs uppercase tracking-[3px] text-champagne-600 font-semibold block mb-4">Our Philosophy</span>
+            <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal text-charcoal-900 leading-snug mb-6">
+                "True elegance begins when personalized care meets organic purity."
+            </h2>
+            <p class="text-stone-600 text-sm sm:text-base font-light leading-relaxed max-w-2xl mx-auto">
+                Founded in the heart of Manhattan, LUXE combines restorative European techniques with sulfate-free biodynamic care to nurture every texture, complexion, and personal ritual. <!--[cite: 14]-->
+            </p>
+        </div>
+    </section>
+
+    <!-- The LUXE Experience (3 Pillars)[cite: 14] -->
+    <section id="features" class="py-28 max-w-7xl mx-auto px-6 lg:px-10 reveal-element"> <!--[cite: 14]-->
+        <div class="text-center max-w-2xl mx-auto mb-20"> <!--[cite: 14]-->
+            <span class="text-xs uppercase tracking-[3px] text-champagne-600 font-semibold block mb-2">Artisan Protocol</span>
+            <h2 class="font-serif text-4xl sm:text-5xl font-bold text-charcoal-900 mb-4">The LUXE Experience</h2> <!--[cite: 14]-->
+            <div class="w-12 h-[2px] bg-champagne-500 mx-auto mt-4"></div> <!--[cite: 14]-->
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8"> <!--[cite: 14]-->
+            
+            <!-- Pillar 1: Master Styling[cite: 14] -->
+            <div class="bg-white p-8 sm:p-10 rounded-3xl border border-cream-300 shadow-linen-card hover:shadow-soft-luxury hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between"> <!--[cite: 14]-->
+                <div>
+                    <span class="font-italiana text-4xl text-champagne-500 block mb-6">01</span>
+                    <h3 class="font-serif text-2xl font-bold text-charcoal-900 mb-3">Master Styling</h3> <!--[cite: 14]-->
+                    <p class="text-stone-600 text-sm leading-relaxed font-light">
+                        Precision cuts tailored to your face shape and lifestyle by senior stylists. <!--[cite: 14]--> Every appointment starts with an individualized facial geometry analysis.
+                    </p>
+                </div>
+                <div class="pt-8 mt-8 border-t border-cream-200 flex items-center justify-between text-xs font-semibold text-champagne-600 uppercase tracking-widest">
+                    <span>Individual Geometry</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </div>
+            </div>
+
+            <!-- Pillar 2: Organic Products[cite: 14] -->
+            <div class="bg-white p-8 sm:p-10 rounded-3xl border border-cream-300 shadow-linen-card hover:shadow-soft-luxury hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between"> <!--[cite: 14]-->
+                <div>
+                    <span class="font-italiana text-4xl text-champagne-500 block mb-6">02</span>
+                    <h3 class="font-serif text-2xl font-bold text-charcoal-900 mb-3">Organic Products</h3> <!--[cite: 14]-->
+                    <p class="text-stone-600 text-sm leading-relaxed font-light">
+                        We use exclusively sulfate-free, botanical products that nourish your hair and skin. <!--[cite: 14]--> Sourced responsibly from biodynamic growers across Provence and Tuscany.
+                    </p>
+                </div>
+                <div class="pt-8 mt-8 border-t border-cream-200 flex items-center justify-between text-xs font-semibold text-champagne-600 uppercase tracking-widest">
+                    <span>Clean Biodynamics</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </div>
+            </div>
+
+            <!-- Pillar 3: Private Lounge[cite: 14] -->
+            <div class="bg-white p-8 sm:p-10 rounded-3xl border border-cream-300 shadow-linen-card hover:shadow-soft-luxury hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between"> <!--[cite: 14]-->
+                <div>
+                    <span class="font-italiana text-4xl text-champagne-500 block mb-6">03</span>
+                    <h3 class="font-serif text-2xl font-bold text-charcoal-900 mb-3">Private Lounge</h3> <!--[cite: 14]-->
+                    <p class="text-stone-600 text-sm leading-relaxed font-light">
+                        Complimentary refreshments and a serene environment to help you decompress. <!--[cite: 14]--> Relax with artisanal botanical teas, chilled prosecco, and secluded styling pods.
+                    </p>
+                </div>
+                <div class="pt-8 mt-8 border-t border-cream-200 flex items-center justify-between text-xs font-semibold text-champagne-600 uppercase tracking-widest">
+                    <span>Sanctuary &amp; Tea</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Visual Lookbook (Editorial Grid) -->
+    <section id="lookbook" class="py-24 bg-cream-200 border-y border-cream-300 reveal-element">
+        <div class="max-w-7xl mx-auto px-6 lg:px-10">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 mb-14">
+                <div>
+                    <span class="text-xs uppercase tracking-[3px] text-champagne-600 font-semibold block mb-2">Curated Folio</span>
+                    <h2 class="font-serif text-3xl sm:text-5xl font-bold text-charcoal-900">Visual Lookbook</h2>
+                </div>
+                <p class="text-xs uppercase tracking-widest text-stone-500 font-medium">Capturing Timeless Transformations in Manhattan</p> <!--[cite: 14]-->
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Lookbook 1 -->
+                <div class="group relative rounded-3xl overflow-hidden h-96 shadow-soft-luxury cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=800&q=80" alt="Full Balayage" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"> <!--[cite: 14]-->
+                    <div class="absolute inset-0 bg-gradient-to-t from-charcoal-900/85 via-charcoal-900/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 text-white">
+                        <span class="text-[10px] uppercase font-bold tracking-widest text-champagne-400">Color Atelier</span>
+                        <h4 class="font-serif text-lg font-bold">Custom Melt Balayage</h4> <!--[cite: 14]-->
+                    </div>
+                </div>
+
+                <!-- Lookbook 2 -->
+                <div class="group relative rounded-3xl overflow-hidden h-96 shadow-soft-luxury cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?auto=format&fit=crop&w=800&q=80" alt="Precision Haircut" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-charcoal-900/85 via-charcoal-900/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 text-white">
+                        <span class="text-[10px] uppercase font-bold tracking-widest text-champagne-400">Precision Cut</span>
+                        <h4 class="font-serif text-lg font-bold">Signature Blowout</h4> <!--[cite: 14]-->
+                    </div>
+                </div>
+
+                <!-- Lookbook 3 -->
+                <div class="group relative rounded-3xl overflow-hidden h-96 shadow-soft-luxury cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=800&q=80" alt="Hydra-Facial Infusion" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"> <!--[cite: 14]-->
+                    <div class="absolute inset-0 bg-gradient-to-t from-charcoal-900/85 via-charcoal-900/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 text-white">
+                        <span class="text-[10px] uppercase font-bold tracking-widest text-champagne-400">Dermal Care</span>
+                        <h4 class="font-serif text-lg font-bold">Hydra-Facial Therapy</h4> <!--[cite: 14]-->
+                    </div>
+                </div>
+
+                <!-- Lookbook 4 -->
+                <div class="group relative rounded-3xl overflow-hidden h-96 shadow-soft-luxury cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80" alt="Bridal Styling" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"> <!--[cite: 14]-->
+                    <div class="absolute inset-0 bg-gradient-to-t from-charcoal-900/85 via-charcoal-900/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 text-white">
+                        <span class="text-[10px] uppercase font-bold tracking-widest text-champagne-400">Bridal Concierge</span> <!--[cite: 14]-->
+                        <h4 class="font-serif text-lg font-bold">Bespoke Bridal Updo</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Service Menu (Pricing Tiers)[cite: 14] -->
+    <section id="pricing" class="py-28 max-w-6xl mx-auto px-6 reveal-element"> <!--[cite: 14]-->
+        <div class="text-center max-w-2xl mx-auto mb-16"> <!--[cite: 14]-->
+            <span class="text-xs uppercase tracking-[3px] text-champagne-600 font-semibold block mb-2">Curated Treatments</span>
+            <h2 class="font-serif text-4xl sm:text-5xl font-bold text-charcoal-900 mb-4">Service Menu</h2> <!--[cite: 14]-->
+            <p class="text-stone-500 text-sm font-light">Each appointment includes personalized consultations, restorative head massages, and sensory aromatherapy.</p>
+        </div>
+
+        <!-- Treatment Rows with Champagne Luxury Borders[cite: 14] -->
+        <div class="bg-white rounded-3xl p-6 sm:p-12 border border-cream-300 shadow-soft-luxury divide-y divide-cream-300">
+            
+            <!-- Item 1: Signature Haircut[cite: 14] -->
+            <div class="menu-item-row py-6 sm:py-8 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 transition-all">
+                <div class="max-w-lg">
+                    <div class="flex items-center gap-3 mb-1">
+                        <h4 class="font-serif text-2xl font-bold text-charcoal-900">Signature Haircut</h4> <!--[cite: 14]-->
+                        <span class="text-[10px] font-bold uppercase tracking-wider bg-cream-200 text-champagne-700 px-2.5 py-0.5 rounded-full">45 Mins</span>
+                    </div>
+                    <p class="text-sm text-stone-500 italic">Wash, cut, and signature blowout tailored to personal lifestyle</p> <!--[cite: 14]-->
+                </div>
+                <div class="flex items-center justify-between w-full sm:w-auto gap-8 pt-2 sm:pt-0">
+                    <span class="font-serif text-3xl font-bold text-charcoal-900">$85+</span> <!--[cite: 14]-->
+                    <a href="#contact" class="service-arrow text-xs uppercase tracking-widest font-bold text-stone-400 hover:text-champagne-600 transition-all flex items-center gap-1.5">
+                        <span>Reserve</span>
+                        <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Item 2: Full Balayage[cite: 14] -->
+            <div class="menu-item-row py-6 sm:py-8 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 transition-all">
+                <div class="max-w-lg">
+                    <div class="flex items-center gap-3 mb-1">
+                        <h4 class="font-serif text-2xl font-bold text-charcoal-900">Full Balayage</h4> <!--[cite: 14]-->
+                        <span class="text-[10px] font-bold uppercase tracking-wider bg-cream-200 text-champagne-700 px-2.5 py-0.5 rounded-full">120 Mins</span>
+                    </div>
+                    <p class="text-sm text-stone-500 italic">Hand-painted custom highlights with gloss toner and bonding mask</p> <!--[cite: 14]-->
+                </div>
+                <div class="flex items-center justify-between w-full sm:w-auto gap-8 pt-2 sm:pt-0">
+                    <span class="font-serif text-3xl font-bold text-charcoal-900">$210+</span> <!--[cite: 14]-->
+                    <a href="#contact" class="service-arrow text-xs uppercase tracking-widest font-bold text-stone-400 hover:text-champagne-600 transition-all flex items-center gap-1.5">
+                        <span>Reserve</span>
+                        <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Item 3: Hydra-Facial[cite: 14] -->
+            <div class="menu-item-row py-6 sm:py-8 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 transition-all">
+                <div class="max-w-lg">
+                    <div class="flex items-center gap-3 mb-1">
+                        <h4 class="font-serif text-2xl font-bold text-charcoal-900">Hydra-Facial</h4> <!--[cite: 14]-->
+                        <span class="text-[10px] font-bold uppercase tracking-wider bg-cream-200 text-champagne-700 px-2.5 py-0.5 rounded-full">60 Mins</span>
+                    </div>
+                    <p class="text-sm text-stone-500 italic">Deep cleansing &amp; hydration treatment powered by natural serums</p> <!--[cite: 14]-->
+                </div>
+                <div class="flex items-center justify-between w-full sm:w-auto gap-8 pt-2 sm:pt-0">
+                    <span class="font-serif text-3xl font-bold text-charcoal-900">$120+</span> <!--[cite: 14]-->
+                    <a href="#contact" class="service-arrow text-xs uppercase tracking-widest font-bold text-stone-400 hover:text-champagne-600 transition-all flex items-center gap-1.5">
+                        <span>Reserve</span>
+                        <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Item 4: Bridal Styling[cite: 14] -->
+            <div class="menu-item-row py-6 sm:py-8 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 transition-all">
+                <div class="max-w-lg">
+                    <div class="flex items-center gap-3 mb-1">
+                        <h4 class="font-serif text-2xl font-bold text-charcoal-900">Bridal Styling</h4> <!--[cite: 14]-->
+                        <span class="text-[10px] font-bold uppercase tracking-wider bg-cream-200 text-champagne-700 px-2.5 py-0.5 rounded-full">Private Suite</span> <!--[cite: 14]-->
+                    </div>
+                    <p class="text-sm text-stone-500 italic">Including comprehensive consultation, preliminary trial, and bridal party champagne</p> <!--[cite: 14]-->
+                </div>
+                <div class="flex items-center justify-between w-full sm:w-auto gap-8 pt-2 sm:pt-0">
+                    <span class="font-serif text-3xl font-bold text-charcoal-900">$150+</span> <!--[cite: 14]-->
+                    <a href="#contact" class="service-arrow text-xs uppercase tracking-widest font-bold text-stone-400 hover:text-champagne-600 transition-all flex items-center gap-1.5">
+                        <span>Reserve</span>
+                        <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Testimonial Editorial Vignette[cite: 14] -->
+    <section class="py-24 bg-white border-y border-cream-300 reveal-element">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <span class="text-champagne-500 font-serif text-4xl block mb-6">“</span>
+            
+            <p class="font-serif text-2xl sm:text-4xl italic text-charcoal-900 leading-relaxed mb-8 font-light">
+                "The atmosphere at LUXE is unmatched. I’ve never walked out of a salon feeling so confident and relaxed. It’s more than a haircut; it’s an experience." <!--[cite: 14]-->
+            </p>
+            
+            <h5 class="uppercase tracking-[3px] text-xs font-bold text-charcoal-900">— Sarah Jenkins</h5> <!--[cite: 14]-->
+            <span class="text-xs uppercase tracking-widest text-stone-400 mt-1 block">Private Client • Manhattan, NY</span> <!--[cite: 14]-->
+        </div>
+    </section>
+
+    <!-- Visit Us & Booking Consultation[cite: 14] -->
+    <section id="contact" class="py-28 max-w-7xl mx-auto px-6 lg:px-10 reveal-element"> <!--[cite: 14]-->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+            
+            <!-- Left Info Panel[cite: 14] -->
+            <div class="lg:col-span-5">
+                <span class="text-xs uppercase tracking-[3px] text-champagne-600 font-semibold block mb-2">Concierge Reservation</span>
+                <h2 class="font-serif text-4xl sm:text-5xl font-bold text-charcoal-900 mb-6">Visit Us</h2> <!--[cite: 14]-->
+                <p class="text-stone-600 text-sm leading-relaxed mb-8 font-light">
+                    Located in the heart of the design district. We recommend booking 2 weeks in advance for bespoke weekend appointments. <!--[cite: 14]-->
+                </p>
+
+                <div class="space-y-6 text-sm text-stone-700">
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 rounded-full bg-cream-200 text-champagne-600 flex items-center justify-center text-sm shadow-sm">
+                            <i class="fa-solid fa-location-dot"></i> <!--[cite: 14]-->
+                        </div>
+                        <div>
+                            <p class="font-bold text-charcoal-900">Manhattan Atelier</p> <!--[cite: 14]-->
+                            <p class="text-stone-500 text-xs">123 Beauty Lane, Manhattan, NY</p> <!--[cite: 14]-->
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 rounded-full bg-cream-200 text-champagne-600 flex items-center justify-center text-sm shadow-sm">
+                            <i class="fa-solid fa-phone"></i> <!--[cite: 14]-->
+                        </div>
+                        <div>
+                            <p class="font-bold text-charcoal-900">Concierge Desk</p>
+                            <p class="text-stone-500 text-xs">(555) 123-4567</p> <!--[cite: 14]-->
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 rounded-full bg-cream-200 text-champagne-600 flex items-center justify-center text-sm shadow-sm">
+                            <i class="fa-regular fa-clock"></i> <!--[cite: 14]-->
+                        </div>
+                        <div>
+                            <p class="font-bold text-charcoal-900">Hours of Ritual</p>
+                            <p class="text-stone-500 text-xs">Mon - Sat: 9am - 8pm</p> <!--[cite: 14]-->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-6 bg-white rounded-2xl border border-cream-300 mt-8 shadow-linen-card">
+                    <p class="font-serif italic text-xs text-charcoal-800 leading-relaxed">
+                        "Your time at LUXE is curated solely for your stillness and revitalization."
+                    </p>
+                    <span class="text-[10px] uppercase tracking-widest text-champagne-600 mt-2 block font-semibold">&mdash; Atelier Direction</span>
+                </div>
+            </div>
+
+            <!-- Right Booking Card[cite: 14] -->
+            <div class="lg:col-span-7 bg-white p-8 sm:p-12 rounded-3xl border border-cream-300 shadow-soft-luxury"> <!--[cite: 14]-->
+                <form id="bookingForm" class="space-y-5"> <!--[cite: 14]-->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                        <div>
+                            <label class="block text-xs uppercase tracking-wider font-semibold text-stone-600 mb-2">Your Name</label> <!--[cite: 14]-->
+                            <input type="text" required placeholder="Claire Montgomery" class="w-full px-4 py-3.5 bg-cream-50 border border-cream-300 rounded-xl text-charcoal-900 text-sm outline-none focus:border-champagne-500 focus:bg-white transition"> <!--[cite: 14]-->
+                        </div>
+                        <div>
+                            <label class="block text-xs uppercase tracking-wider font-semibold text-stone-600 mb-2">Phone Contact</label>
+                            <input type="tel" required placeholder="(555) 234-5678" class="w-full px-4 py-3.5 bg-cream-50 border border-cream-300 rounded-xl text-charcoal-900 text-sm outline-none focus:border-champagne-500 focus:bg-white transition">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider font-semibold text-stone-600 mb-2">Service Interested In</label> <!--[cite: 14]-->
+                        <select class="w-full px-4 py-3.5 bg-cream-50 border border-cream-300 rounded-xl text-charcoal-900 text-sm outline-none focus:border-champagne-500 focus:bg-white transition cursor-pointer"> <!--[cite: 14]-->
+                            <option>Signature Haircut ($85+)</option> <!--[cite: 14]-->
+                            <option>Full Balayage ($210+)</option> <!--[cite: 14]-->
+                            <option>Hydra-Facial Therapy ($120+)</option> <!--[cite: 14]-->
+                            <option>Bridal Styling Consultation ($150+)</option> <!--[cite: 14]-->
+                            <option>Botanical Scalp &amp; Gloss Ritual</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider font-semibold text-stone-600 mb-2">Preferred Date &amp; Notes</label>
+                        <textarea rows="4" required placeholder="Let us know your desired date, stylist preference, or wedding event schedule..." class="w-full px-4 py-3.5 bg-cream-50 border border-cream-300 rounded-xl text-charcoal-900 text-sm outline-none focus:border-champagne-500 focus:bg-white transition resize-none"></textarea> <!--[cite: 14]-->
+                    </div>
+
+                    <button type="submit" class="w-full py-4 rounded-full bg-charcoal-900 hover:bg-champagne-600 text-white font-bold text-xs uppercase tracking-[2px] shadow-lg transition-all duration-300"> <!--[cite: 14]-->
+                        Request Appointment <!--[cite: 14]-->
+                    </button>
+                </form>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer[cite: 14] -->
+    <footer class="py-12 border-t border-cream-300 bg-cream-50 text-stone-500 text-xs"> <!--[cite: 14]-->
+        <div class="max-w-7xl mx-auto px-6 lg:px-10 flex flex-col sm:flex-row items-center justify-between gap-6">
+            
+            <div class="font-italiana text-2xl tracking-[3px] text-charcoal-900 flex items-center gap-1.5">
+                <span>LUXE</span> <!--[cite: 14]-->
+                <span class="text-xs uppercase tracking-widest text-stone-400 font-sans">Atelier NYC</span> <!--[cite: 14]-->
+            </div>
+
+            <!-- Exact Mandatory Footer Requirement -->
+            <p class="text-center font-medium tracking-wide text-stone-500">
+                © 2026 WebNova Studio · RR Web Designers · All rights reserved.
+            </p>
+
+            <div class="flex items-center gap-6 text-stone-600 text-sm">
+                <a href="#" class="hover:text-champagne-600 transition" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#" class="hover:text-champagne-600 transition" aria-label="Pinterest"><i class="fa-brands fa-pinterest"></i></a>
+                <a href="#" class="hover:text-champagne-600 transition" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive JavaScript[cite: 14] -->
+    <script>
+        // Mobile Drawer Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileDrawer = document.getElementById('mobileDrawer');
+        const menuToggleIcon = document.getElementById('menuToggleIcon');
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+        if (mobileMenuBtn && mobileDrawer) {
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileDrawer.classList.toggle('hidden');
+                if (mobileDrawer.classList.contains('hidden')) {
+                    menuToggleIcon.classList.remove('fa-xmark');
+                    menuToggleIcon.classList.add('fa-bars');
+                } else {
+                    menuToggleIcon.classList.remove('fa-bars');
+                    menuToggleIcon.classList.add('fa-xmark');
+                }
+            });
+
+            mobileNavLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileDrawer.classList.add('hidden');
+                    menuToggleIcon.classList.remove('fa-xmark');
+                    menuToggleIcon.classList.add('fa-bars');
+                });
+            });
+        }
+
+        // Scroll Intersection Observer
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.12 });
+
+        document.querySelectorAll('.reveal-element').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Booking Form Submission & Toast[cite: 14]
+        const bookingForm = document.getElementById('bookingForm'); /*[cite: 14]*/
+        const bookingToast = document.getElementById('bookingToast');
+
+        if (bookingForm && bookingToast) {
+            bookingForm.addEventListener('submit', (e) => { /*[cite: 14]*/
+                e.preventDefault(); /*[cite: 14]*/
+                bookingToast.classList.remove('-translate-y-28', 'opacity-0');
+                setTimeout(() => {
+                    bookingToast.classList.add('-translate-y-28', 'opacity-0');
+                }, 3800);
+                bookingForm.reset();
+            });
+        }
+    </script>
+</body>
+</html>
